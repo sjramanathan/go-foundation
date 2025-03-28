@@ -37,31 +37,31 @@ func main() {
 	fmt.Printf("m3: %v\n", m3)
 }
 
-// func appendInt(slice []int, value int) []int {
-// 	index := len(slice)
+func appendInt(slice []int, value int) []int {
+	index := len(slice)
 
-// 	if len(slice) < cap(slice) {
-// 		slice = slice[:len(slice)+1]
-// 	} else {
+	if len(slice) < cap(slice) {
+		slice = slice[:len(slice)+1]
+	} else {
 
-// 		fmt.Printf("reallocate: %d -> %d ]n", len(slice), 2*len(slice)+1)
-// 		newSlice := make([]int, len(slice)*2+1)
-// 		copy(newSlice, slice) // shallow copy
-// 		slice = newSlice[:len(slice)+1]
-// 	}
+		fmt.Printf("reallocate: %d -> %d ]n", len(slice), 2*len(slice)+1)
+		newSlice := make([]int, len(slice)*2+1)
+		copy(newSlice, slice) // shallow copy
+		slice = newSlice[:len(slice)+1]
+	}
 
-// 	slice[index] = value
-// 	return slice
-// }
+	slice[index] = value
+	return slice
+}
 
-// func concat(s1, s2 []string) []string {
-// 	s3 := make([]string, len(s1)+len(s2), 2*(len(s1)+len(s2))+1)
+func concat(s1, s2 []string) []string {
+	s3 := make([]string, len(s1)+len(s2), 2*(len(s1)+len(s2))+1)
 
-// 	copy(s3, s1)
-// 	copy(s3[len(s1):], s2)
+	copy(s3, s1)
+	copy(s3[len(s1):], s2)
 
-// 	return s3
-// }
+	return s3
+}
 
 func median(values []float64) (float64, error) {
 	if len(values) == 0 {
