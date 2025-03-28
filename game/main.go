@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"slices"
 )
 
 type Item struct {
@@ -21,6 +22,10 @@ func main() {
 		Y: 10,
 	}
 	fmt.Printf("i3: %#v \n", i3)
+
+	k := Jade
+	fmt.Printf("k: %v \n", k)
+	fmt.Printf("k: %#v \n", k)
 }
 
 func NewItem1(x, y int) Item {
@@ -52,12 +57,48 @@ func NewItem4(x, y int) (*Item, error) {
 	i = Item{X: x, Y: y}
 	return &i, nil
 }
- 
+
 type Player struct {
 	Name string
 	Item // Here its an embedded. This allows for the fields in Item to be lifted up in to the root level.
-} 
+	Keys []Key
+}
 
-func moveAll(ms []mover, x, y int) {
-	for _, m := range
+type Key byte
+
+const (
+	Jade Key = iota + 1 // First value starts with one and then each value after is an increment. This structure is used for enums.
+	Copper
+	Crystal
+	invalidKey
+)
+
+// The reason why enabling this immediately causes "fmt" to print the string is that here I'm inheriting an interface. This notifies the "fmt" package that this is available for use.
+func (k Key) String() string {
+	switch k {
+	case Jade:
+		return "jade"
+	case Copper:
+		return "copper"
+	case Crystal:
+		return "crystal"
+	}
+
+	return fmt.Sprintf("<Key %d>", k)
+}
+
+func (p *Player) FoundKey(k Key) error {
+	if k < Jade || k >= invalidKey {
+		return fmt.Errorf("This is an unknown key")
+	}
+
+	if !containsKey(p.Keys, k) {
+		p.Keys = append(p.Keys, k)
+	}
+
+	return nil
+}
+
+func containsKey(keys []Key, k Key) bool {
+	return slices.Contains(keys, k)
 }
