@@ -23,3 +23,18 @@ go.work.sum
 
 # env file
 .env
+
+# Go modules and cache
+/go/pkg/
+/go/bin/
+/go/src/
+/bin/
+/pkg/
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+**/.DS_Store
