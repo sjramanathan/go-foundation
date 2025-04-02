@@ -14,6 +14,7 @@ import (
 func TestTokenize(t *testing.T) {
 	text := "What's on second?"
 	expected := []string{"what", "on", "second"}
+
 	tokens := Tokenize(text)
 
 	if !reflect.DeepEqual(expected, tokens) {
