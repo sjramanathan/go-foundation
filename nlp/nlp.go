@@ -3,6 +3,8 @@ package nlp
 import (
 	"regexp"
 	"strings"
+
+	"github.com/sjramanathan/go-foundation/nlp/stemmer"
 )
 
 var (
@@ -16,7 +18,11 @@ func Tokenize(text string) []string {
 
 	for _, w := range words {
 		token := strings.ToLower(w)
-		tokens = append(tokens, token)
+		token = stemmer.Stem(token)
+
+		if len(token) > 0 {
+			tokens = append(tokens, token)
+		}
 	}
 
 	return tokens

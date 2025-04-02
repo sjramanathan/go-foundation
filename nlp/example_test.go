@@ -12,5 +12,5 @@ func ExampleTokenize() {
 	fmt.Println(tokens)
 
 	// output:
-	// [who s on first]
+	// [who on first]
 }
